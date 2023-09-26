@@ -32,7 +32,7 @@ sap.ui.define(
           oView.setModel(newModel, "global");
 
           var newModel1 = new JSONModel({
-            edit: true,
+            edit: false,
             save: false,
             editable: false,
           });
@@ -47,6 +47,7 @@ sap.ui.define(
           return oFiltro;
         },
         _onObjectMatched: function (oEvent) {
+          const that = this
           this.getView().bindElement({
             path:
               "/" +
@@ -60,13 +61,13 @@ sap.ui.define(
             ];
 
           oView.setModel(new JSONModel(oData), "cad");
-            
-            
 
-            //Fill eng
-            
+          this.setVisibleNextStage(oData.NextStage)
+
+          //Fill eng
+
           const key = this.extractMaterialId(window.decodeURIComponent(oEvent.getParameter("arguments").id))
-          const oService =  this.getView().getModel()
+          const oService = this.getView().getModel()
           let oMaterialId = this.createFilter("IdProc", key);
           let oEngenharia = this.getOwnerComponent().getModel("engenharia")
           oEngenharia.setData({})
@@ -76,7 +77,7 @@ sap.ui.define(
             filters: [oMaterialId],
             success: function (res) {
               console.log(res.results[0])
-              if (res.results.length > 0){
+              if (res.results.length > 0) {
                 oEngenharia.setData(res.results[0])
               }
             },
@@ -86,7 +87,7 @@ sap.ui.define(
           });
 
           var func = "";
-
+          console.log(that.getView().getModel("newModel"))
           oView.getModel().read("/GetUserFunc", {
             success: function (oQueryResult) {
               func = oQueryResult.Func;
@@ -133,15 +134,15 @@ sap.ui.define(
                     break;
                 }
               }
-
               oView.setModel(new JSONModel(newModel), "global");
+              oView.getModel("newModel").setData(newModel);
             },
           });
         },
         extractMaterialId: function (cadena) {
           const expresionRegular = /\(([^)]+)\)/;
           const coincidencia = cadena.match(expresionRegular);
-          
+
           if (coincidencia) {
             return coincidencia[1]; // Devuelve el contenido entre paréntesis
           } else {
@@ -237,12 +238,14 @@ sap.ui.define(
             }
           );
         },
-
         editPress: function () {
+          debugger
+          this.setEditNextStage(true)
           this.switchProp(false);
         },
-
         savePress: function () {
+          this.setEditNextStage(false)
+          this.changeFormMode(false)
           var oView = this.getView();
           var oCad = oView.getModel("cad");
           var oData = {
@@ -476,7 +479,6 @@ sap.ui.define(
             },
           });
         },
-
         switchProp: function (bool) {
           var oView = this.getView();
 
@@ -484,6 +486,97 @@ sap.ui.define(
           oView.getModel("newModel").setProperty("/save", !bool);
           oView.getModel("newModel").setProperty("/editable", !bool);
         },
+        setVisibleNextStage: function (stage) {
+          const stagesModel = this.getOwnerComponent().getModel("stagesModel")
+          let stages = {
+            "dadosbasicos": true,
+            "description": true,
+            "engenharia": true,
+            "fiscal": true,
+            "controladoria": true,
+            "suprimentos": true
+          }
+
+          let defaultEdit = {
+            "dadosbasicos": false,
+            "description": false,
+            "engenharia": false,
+            "fiscal": false,
+            "controladoria": false,
+            "suprimentos": false
+          }
+
+          switch (stage) {
+            case 0:
+              stages.controladoria = false
+              stages.suprimentos = false
+              stages.fiscal = false
+              break
+            case 1:
+              stages.controladoria = false
+              stages.suprimentos = false
+              stages.fiscal = false
+              break
+            case 2:
+              stages.controladoria = false
+              stages.suprimentos = false
+              stages.fiscal = false
+              break
+            case 3:
+              stages.controladoria = false
+              stages.suprimentos = false
+              break
+            case 4:
+              stages.suprimentos = false
+              break
+            case 5:
+              break
+          }
+          stagesModel.setProperty("/visible", stages)
+          stagesModel.setProperty("/editable", defaultEdit)
+          stagesModel.setProperty("/nextStage", stage)
+        },
+
+        setEditNextStage: function (isEditable, stage) {
+          const stagesModel = this.getOwnerComponent().getModel("stagesModel")
+          let newStage = stage ? stage : stagesModel.getProperty("/nextStage")
+
+          let stages = {
+            "dadosbasicos": false,
+            "description": false,
+            "engenharia": false,
+            "fiscal": false,
+            "controladoria": false,
+            "suprimentos": false
+          }
+
+          if (!isEditable) {
+            stagesModel.setProperty("/editable", stages)
+            return
+          }
+
+          switch (newStage) {
+            case 0:
+              stages.dadosbasicos = true
+              break
+            case 1:
+              stages.description = true
+              break
+            case 2:
+              stages.engenharia = true
+              break
+            case 3:
+              stages.fiscal = true
+              break
+            case 4:
+              stages.controladoria = true
+              break
+            case 5:
+              stages.suprimentos = true
+              break
+          }
+          stagesModel.setProperty("/editable", stages)
+        }
       }
     );
   }

@@ -1,37 +1,73 @@
-<mvc:View controllerName="br.com.fortlev.cadmaterial.cadmaterial.controller.Detalhes" 
-          xmlns="sap.m" 
-          xmlns:mvc="sap.ui.core.mvc"
-          xmlns:f="sap.ui.layout.form"
-          xmlns:l="sap.ui.layout"
-          xmlns:core="sap.ui.core"
-          displayBlock="true">
-        
-    <Page title="{i18n>detalhesTitle}"
-          showNavButton="true"
-          navButtonPress=".onNavBack">
+<mvc:View
+    controllerName="br.com.fortlev.cadmaterial.cadmaterial.controller.Detalhes"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+>
+    <Page
+        title="{i18n>detalhesTitle}"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+    >
         <headerContent>
             <VBox visible="{global>/aprov}">
-                <Button id="aprov"  text="Aprovar" visible="{newModel>/edit}"  press=".aprovPress" />
+                <Button
+                    id="aprov"
+                    text="Aprovar"
+                    visible="{newModel>/edit}"
+                    press=".aprovPress"
+                />
             </VBox>
             <VBox visible="{global>/edit}">
-                <Button id="editar" text="Editar"  visible="{newModel>/edit}"  press=".editPress" />
+                <Button
+                    id="editar"
+                    text="Editar"
+                    visible="{newModel>/edit}"
+                    press=".editPress"
+                />
             </VBox>
             <VBox visible="{global>/estorn}">
-                <Button id="estorn" text="Estornar" visible="{newModel>/edit}"  press=".estornPress" />
+                <Button
+                    id="estorn"
+                    text="Estornar"
+                    visible="{newModel>/edit}"
+                    press=".estornPress"
+                />
             </VBox>
             <VBox visible="{global>/retorn}">
-                <Button id="retorn" text="Retornar" visible="{newModel>/edit}"  press=".retornPress" />
+                <Button
+                    id="retorn"
+                    text="Retornar"
+                    visible="{newModel>/edit}"
+                    press=".retornPress"
+                />
             </VBox>
             <VBox visible="{global>/save}">
-                <Button id="save"   text="Salvar" visible="{newModel>/save}" press=".savePress" />
+                <Button
+                    id="save"
+                    text="Salvar"
+                    visible="{newModel>/save}"
+                    press=".savePress"
+                />
             </VBox>
             <VBox visible="{global>/save}">
-                <Button id="cancel" text="Cancelar"  visible="{newModel>/save}" press=".cancPress" />
+                <Button
+                    id="cancel"
+                    text="Cancelar"
+                    visible="{newModel>/save}"
+                    press=".cancPress"
+                />
             </VBox>
-		</headerContent>
+        </headerContent>
         <content>
             <VBox class="sapUiSmallMargin">
-                <f:SimpleForm id="gerais" editable="false" layout="ColumnLayout"
+                <f:SimpleForm
+                    id="gerais"
+                    editable="false"
+                    layout="ColumnLayout"
                     title="Dados Gerais"
                     labelSpanXL="4"
                     labelSpanL="4"
@@ -40,26 +76,51 @@
                     columnsXL="2"
                     columnsL="2"
                     columnsM="1"
-                    singleContainerFullSize="false">
+                    singleContainerFullSize="false"
+                >
                     <Label text="ID do Processo" />
-                    <Input editable="false" value="{cad>/IdProc}" />
+                    <Input
+                        editable="false"
+                        value="{cad>/IdProc}"
+                    />
                     <Label text="Solicitante" />
-                    <Input editable="false" value="{cad>/Usuario}" />
+                    <Input
+                        editable="false"
+                        value="{cad>/Usuario}"
+                    />
                     <Label text="Aprovador" />
-                    <Input editable="false" value="{cad>/Aprovador}" />
+                    <Input
+                        editable="false"
+                        value="{cad>/Aprovador}"
+                    />
                     <Label text="Data da Solicitação" />
-                    <Input editable="false" value="{cad>/Datum}" />
-                    <Input editable="false" value="{cad>/Timlo}">
+                    <Input
+                        editable="false"
+                        value="{cad>/Datum}"
+                    />
+                    <Input
+                        editable="false"
+                        value="{cad>/Timlo}"
+                    >
                         <layoutData>
                             <l:GridData span="XL3 L4 M5 S5" />
                         </layoutData>
                     </Input>
                     <Label text="Status" />
-                    <Input editable="false" value="{cad>/Status}" />
+                    <Input
+                        editable="false"
+                        value="{cad>/Status}"
+                    />
                     <Label text="N° Material" />
-                    <Input editable="false" value="{cad>/Matnr}" />
+                    <Input
+                        editable="false"
+                        value="{cad>/Matnr}"
+                    />
                 </f:SimpleForm>
-                <f:SimpleForm id="basicos" editable="{newModel>/editable}" layout="ColumnLayout"
+                <f:SimpleForm
+                    id="basicos"
+                    editable="{stagesModel>/form/editable}"
+                    layout="ColumnLayout"
                     title="Dados Básicos"
                     labelSpanXL="4"
                     labelSpanL="4"
@@ -68,64 +129,142 @@
                     columnsXL="2"
                     columnsL="2"
                     columnsM="1"
-                    singleContainerFullSize="false">
+                    singleContainerFullSize="false"
+                >
                     <f:content>
                         <Label text="Tipo do Material" />
-                        <ComboBox items="{path: '/TipoMatSet', sorter: { path: 'Mtart' }, length: '500'}" id="tipoMat" editable="{newModel>/editable}" selectedKey="{cad>/Mtart}">
-                            <core:ListItem text="{Mtart} - {Mtbez}" key="{Mtart}"/>
+                        <ComboBox
+                            items="{path: '/TipoMatSet', sorter: { path: 'Mtart' }, length: '500'}"
+                            id="tipoMat"
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            selectedKey="{cad>/Mtart}"
+                        >
+                            <core:ListItem
+                                text="{Mtart} - {Mtbez}"
+                                key="{Mtart}"
+                            />
                         </ComboBox>
                         <Label text="Unidade de Medida" />
-                        <ComboBox items="{path: '/UMBasicaSet', sorter: { path: 'Msehi' }, length: '500'}" id="UMBasica" editable="{newModel>/editable}" selectedKey="{cad>/Meins}">
-                            <core:ListItem text="{Msehi} - {Msehl}" key="{Msehi}"/>
+                        <ComboBox
+                            items="{path: '/UMBasicaSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMBasica"
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            selectedKey="{cad>/Meins}"
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
                         </ComboBox>
                         <Label text="Grupo de Mercadorias" />
-                        <ComboBox items="{path: '/GMERCSet', sorter: { path: 'Matkl' }, length: '500'}" id="grupoMerc" editable="{newModel>/editable}" selectedKey="{cad>/Matkl}">
-                            <core:ListItem text="{Matkl} - {Wgbez}" key="{Matkl}"/>
+                        <ComboBox
+                            items="{path: '/GMERCSet', sorter: { path: 'Matkl' }, length: '500'}"
+                            id="grupoMerc"
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            selectedKey="{cad>/Matkl}"
+                        >
+                            <core:ListItem
+                                text="{Matkl} - {Wgbez}"
+                                key="{Matkl}"
+                            />
                         </ComboBox>
                         <Label text="Classe de Avaliação" />
-                        <ComboBox items="{path: '/CAvalSet', sorter: { path: 'Bklas' }, length: '500'}" id="classAval" editable="{newModel>/editable}" selectedKey="{cad>/Bklas}">
-                            <core:ListItem text="{Bklas} - {Bkbez}" key="{Bklas}"/>
+                        <ComboBox
+                            items="{path: '/CAvalSet', sorter: { path: 'Bklas' }, length: '500'}"
+                            id="classAval"
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            selectedKey="{cad>/Bklas}"
+                        >
+                            <core:ListItem
+                                text="{Bklas} - {Bkbez}"
+                                key="{Bklas}"
+                            />
                         </ComboBox>
 
                         <Label text="Peso Liquido/U.M" />
-                        <Input editable="{newModel>/editable}" value="{cad>/Ntgew}"></Input>
-                        <ComboBox items="{path: '/UMPesoSet', sorter: { path: 'Msehi' }, length: '500'}" id="UMPeso1" editable="{newModel>/editable}" selectedKey="{cad>/Gewei}">
-                            <core:ListItem text="{Msehi} - {Msehl}" key="{Msehi}"/>
+                        <Input
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            value="{cad>/Ntgew}"
+                        />
+                        <ComboBox
+                            items="{path: '/UMPesoSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMPeso1"
+                           editable="{stagesModel>/editable/dadosbasicos}"
+                            selectedKey="{cad>/Gewei}"
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
                             <layoutData>
                                 <l:GridData span="XL1 L2 M3 S3" />
                             </layoutData>
                         </ComboBox>
                         <Label text="Peso Bruto/U.M" />
-                        <Input editable="{newModel>/editable}" value="{cad>/Brgew}"></Input>
-                        <ComboBox items="{path: '/UMPesoSet', sorter: { path: 'Msehi' }, length: '500'}" id="UMPeso2" editable="{newModel>/editable}" selectedKey="{cad>/Gewei}">
-                            <core:ListItem text="{Msehi} - {Msehl}" key="{Msehi}"/>
+                        <Input
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            value="{cad>/Brgew}"
+                        />
+                        <ComboBox
+                            items="{path: '/UMPesoSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMPeso2"
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            selectedKey="{cad>/Gewei}"
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
                             <layoutData>
                                 <l:GridData span="XL1 L2 M3 S3" />
                             </layoutData>
                         </ComboBox>
                         <Label text="Volume/U.M" />
-                        <Input editable="{newModel>/editable}" value="{cad>/Volum}">
-                        </Input>
-                        <ComboBox items="{path: '/UMVolumeSet', sorter: { path: 'Msehi' }, length: '500'}" id="UMVolume" editable="{newModel>/editable}" selectedKey="{cad>/Voleh}">
-                            <core:ListItem text="{Msehi} - {Msehl}" key="{Msehi}"/>
+                        <Input
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            value="{cad>/Volum}"
+                        />
+                        <ComboBox
+                            items="{path: '/UMVolumeSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMVolume"
+                            editable="{stagesModel>/editable/dadosbasicos}"
+                            selectedKey="{cad>/Voleh}"
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
                             <layoutData>
                                 <l:GridData span="XL1 L2 M3 S3" />
                             </layoutData>
                         </ComboBox>
                     </f:content>
                 </f:SimpleForm>
-                <f:SimpleForm id="descricoes" editable="{newModel>/editable}" layout="ResponsiveGridLayout"
-                    title="Descrições">
+                <f:SimpleForm
+                    id="descricoes"
+                    editable="{stagesModel>/form/editable}"
+                    layout="ResponsiveGridLayout"
+                    title="Descrições"
+                >
                     <f:content>
                         <Label text="Descrição Breve" />
-                        <Input editable="{newModel>/editable}" maxLength="40" value="{cad>/Maktx}" />
+                        <Input
+                            editable="{stagesModel>/editable/description}"
+                            maxLength="40"
+                            value="{cad>/Maktx}"
+                        />
                         <Label text="Descrição Longa" />
-                        <TextArea editable="{newModel>/editable}" width="100%" maxLength="1000" value="{cad>/TextoLongo}" />
+                        <TextArea
+                            editable="{stagesModel>/editable/description}"
+                            width="100%"
+                            maxLength="1000"
+                            value="{cad>/TextoLongo}"
+                        />
                     </f:content>
                 </f:SimpleForm>
                 <f:SimpleForm
-                     id="engenharia"
-                    editable="{newModel>/editable}"
+                    id="engenharia"
+                    editable="false"
                     layout="ColumnLayout"
                     title="Engenharia"
                     labelSpanXL="4"
@@ -139,20 +278,29 @@
                 >
                     <f:content>
                         <Label text="Descrição Curta" />
-                        <Input
+                        <!-- <Input
                             editable="{newModel>/editable}"
+                            value="{engenharia>/Descricao}"
+                            maxLength="40"
+                            required="true"
+                        /> -->
+                        <Input
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/Descricao}"
                             maxLength="40"
                             required="true"
                         />
                         <Label text="Descrição Detalhada" />
-                       
-                        	<TextArea value="{engenharia>/DescricaoLonga}"  width="100%"  editable="{newModel>/editable}"/>
-                         <Label text="Unidade de Medida" />
+                        <TextArea
+                            value="{engenharia>/DescricaoLonga}"
+                            width="100%"
+                            editable="{stagesModel>/editable/engenharia}"
+                        />
+                        <Label text="Unidade de Medida" />
                         <ComboBox
                             items="{path: '/UMBasicaSet', sorter: { path: 'Msehi' }, length: '500'}"
                             id="UMBasicaEngenharia"
-                            editable="{newModel>/editable}"
+                           editable="{stagesModel>/editable/engenharia}"
                             selectedKey="{engenharia>/UnidMedida}"
                         >
                             <core:ListItem
@@ -160,11 +308,11 @@
                                 key="{Msehi}"
                             />
                         </ComboBox>
-                          <Label text="Grupo de Mercadorias" />
+                        <Label text="Grupo de Mercadorias" />
                         <ComboBox
                             items="{path: '/GMERCSet', sorter: { path: 'Matkl' }, length: '500'}"
                             id="grupoMercEngenharia"
-                            editable="{newModel>/editable}"
+                           editable="{stagesModel>/editable/engenharia}"
                             selectedKey="{engenharia>/Matkl}"
                         >
                             <core:ListItem
@@ -172,19 +320,19 @@
                                 key="{Matkl}"
                             />
                         </ComboBox>
-                         <Label text="Arquivos eletrônicos" />
+                        <Label text="Arquivos eletrônicos" />
                         <Input
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/CodMaterialEngenharia}"
                         />
-                         <Label text="Tipo do Material" />
+                        <Label text="Tipo do Material" />
                         <Select
                             id="tipoMatEngenharia"
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             selectedKey="{engenharia>/TipoMaterial}"
                         >
                             <items>
-                            <core:Item
+                                <core:Item
                                     text=""
                                     key="Blank"
                                 />
@@ -212,88 +360,105 @@
                         </Select>
                         <Label text="Aplicação (utilização)" />
                         <Input
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/Aplicacao}"
                         />
                         <Label text="Cor" />
                         <Input
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/Cor}"
                         />
                         <Label text="Fabricante" />
                         <Input
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/Fabricante}"
                         />
-                           <Label text="Referência Fabricante " />
+                        <Label text="Referência Fabricante " />
                         <Input
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/RefFabricante}"
                         />
-                           <Label text="Altura" />
-                        <Input
-                        type="Number"
-                            editable="{newModel>/editable}"
-                            value="{engenharia>/Comprimento}"
-                        />
-                           <Label text="Largura" />
-                        <Input
-                        type="Number"
-                            editable="{newModel>/editable}"
-                            value="{engenharia>/Largura}"
-                        />
-                           <Label text="Comprimento" />
-                        <Input
-                        type="Number"
-                            editable="{newModel>/editable}"
-                            value="{engenharia>/Altura}"
-                        />
-                          <Label text="Espessura" />
-                        <Input
-                        type="Number"
-                            editable="{newModel>/editable}"
-                            value="{engenharia>/Espessura}"
-                        />
-                          <Label text="Diâmetro/Raio" />
+                        <Label text="Altura" />
                         <Input
                             type="Number"
-                            editable="{newModel>/editable}"
+                           editable="{stagesModel>/editable/engenharia}"
+                            value="{engenharia>/Comprimento}"
+                        />
+                        <Label text="Largura" />
+                        <Input
+                            type="Number"
+                            editable="{stagesModel>/editable/engenharia}"
+                            value="{engenharia>/Largura}"
+                        />
+                        <Label text="Comprimento" />
+                        <Input
+                            type="Number"
+                            editable="{stagesModel>/editable/engenharia}"
+                            value="{engenharia>/Altura}"
+                        />
+                        <Label text="Espessura" />
+                        <Input
+                            type="Number"
+                            editable="{stagesModel>/editable/engenharia}"
+                            value="{engenharia>/Espessura}"
+                        />
+                        <Label text="Diâmetro/Raio" />
+                        <Input
+                            type="Number"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/DiameterRadio}"
                         />
                         <Label text="Tensão" />
                         <Input
                             type="Number"
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/Tensao}"
                         />
                         <Label text="Amperagem" />
                         <Input
                             type="Number"
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/Amperagem}"
                         />
                         <Label text="Informações Complementares" />
                         <Input
-                            editable="{newModel>/editable}"
+                            editable="{stagesModel>/editable/engenharia}"
                             value="{engenharia>/InfoComplementares}"
                         />
-                        
                     </f:content>
                 </f:SimpleForm>
-                <f:SimpleForm id="fiscal" editable="true" layout="ResponsiveGridLayout"
-                    title="Fiscal">
+                <f:SimpleForm
+                    id="fiscal"
+                    editable="{stagesModel>/form/editable}"
+                    layout="ResponsiveGridLayout"
+                    title="Fiscal"
+                    visible="{stagesModel>/visible/fiscal}"
+                >
                     <f:content>
                         <Label text="NCM (TIPI)" />
-                        <Input editable="{newModel>/editable}" maxLength="16" value="{cad>/Steuc}" />
+                        <Input
+                            editable="{stagesModel>/editable/fiscal}"
+                            maxLength="16"
+                            value="{cad>/Steuc}"
+                        />
                     </f:content>
                 </f:SimpleForm>
-                <f:SimpleForm id="outros" editable="{newModel>/editable}" layout="ResponsiveGridLayout"
-                    title="Outros">
+                <!-- <f:SimpleForm
+                    id="outros"
+                    editable="{newModel>/editable}"
+                    layout="ResponsiveGridLayout"
+                    title="Outros"
+                >
                     <f:content>
                         <Label text="Observação" />
-                        <TextArea editable="{newModel>/editable}" width="100%" maxLength="200" value="{cad>/Observacao}" />
+                        <TextArea
+                            editable="{newModel>/editable}"
+                            width="100%"
+                            maxLength="200"
+                            value="{cad>/Observacao}"
+                        />
                     </f:content>
-                </f:SimpleForm>
+                </f:SimpleForm> -->
             </VBox>
         </content>
     </Page>
