@@ -1,0 +1,16 @@
+<mvc:View controllerName="br.com.fortlev.cadmaterial.cadmaterial.controller.Principal" 
+          xmlns="sap.m" 
+          xmlns:mvc="sap.ui.core.mvc"
+          displayBlock="true">
+        
+        <Page title="{i18n>principalTitle}">
+                <content>
+                        <Button text="{i18n>matInterno}"
+                                press=".openInterno"
+                                class="sapUiSmallMarginEnd"/>
+                        <Button text="{i18n>matRevenda}" 
+                                press=".openRevenda"
+                                class="sapUiSmallMarginEnd"/>
+                </content>
+        </Page>
+</mvc:View>

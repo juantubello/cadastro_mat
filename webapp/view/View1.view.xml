@@ -1,0 +1,48 @@
+<mvc:View controllerName="br.com.fortlev.cadmaterial.cadmaterial.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <Table
+            id="table"
+            width="auto"
+            items="{
+                path: '/MATPROCSet',
+                sorter: {
+                    path: 'IdProc',
+                    descending: false
+                }
+            }"
+            noDataText="Sem dados"
+            growing="true"
+            growingScrollToLoad="true">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title id="tableHeader" text="Tabela Odata" level="H3" />
+                    <ToolbarSpacer />
+                </OverflowToolbar>
+            </headerToolbar>
+
+            <columns>
+                <Column id="nameColumn">
+                    <Text text="ID" id="nameColumnTitle" />
+                </Column>
+                <Column id="columnConnid">
+                    <Text text="Usuario" id="titleConnid" />
+                </Column>
+                <Column id="columnFldate">
+                    <Text text="Status" id="titleFldate" />
+                </Column>
+            </columns>
+
+            <items>
+                <ColumnListItem type="Navigation">
+                    <cells>
+                        <ObjectIdentifier title="{IdProc}" />
+                        <ObjectIdentifier title="{Usuario}" />
+                        <ObjectIdentifier title="{Status}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>

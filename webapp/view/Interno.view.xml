@@ -1,0 +1,79 @@
+<mvc:View 
+    controllerName="br.com.fortlev.cadmaterial.cadmaterial.controller.Interno" 
+    xmlns="sap.m"
+    xmlns:ui="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+    <Page title="{i18n>internoTitle}"
+          showNavButton="true"
+          navButtonPress=".onNavBack">
+        <content>
+            <ui:Table
+                rows="{ path: '/MATPROCSet', events: { change: '.onBindingChange' } }"
+                selectionMode="None"
+                enableSelectAll="false"
+                id="tabelaProc">
+                <ui:extension>
+                    <OverflowToolbar id="otbSubheader1">
+                        <Title text="{i18n>tableTitle}" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Button id="novoButton1" text="Solicitar Novo Material" type="Transparent" press="novoCadastro" tooltip="Novo Cadastro"/>
+                        <Button id="excelButton2" icon="sap-icon://excel-attachment" press="exportUI" tooltip="Exportar para Excel"/>
+                        <Button id="filtroButton3" icon="sap-icon://clear-filter" press="filtrar" tooltip="Remover Filtros"/>
+                        <Button id="refreshButton4" icon="sap-icon://refresh" press="atualizar" tooltip="Atualizar Dados"/>
+                    </OverflowToolbar>
+                </ui:extension>
+                <ui:columns>
+					<ui:Column
+                        sortProperty="IdProc"
+                        filterProperty="IdProc">
+						<Label text="ID" />
+						<ui:template>
+							<Text text="{IdProc}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+                        sortProperty="Usuario"
+                        filterProperty="Usuario">
+						<Label text="Usuario" />
+						<ui:template>
+							<Text text="{Usuario}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+                        sortProperty="Status"
+                        filterProperty="Status">
+						<Label text="Status" />
+						<ui:template>
+							<Text text="{Status}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+                        sortProperty="Datum"
+                        filterProperty="Datum">
+						<Label text="Data" />
+						<ui:template>
+							<Text text="{Datum}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+                        sortProperty="Timlo"
+                        filterProperty="Timlo">
+						<Label text="Hora" />
+						<ui:template>
+							<Text text="{Timlo}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+                        sortProperty="Maktx"
+                        filterProperty="Maktx">
+						<Label text="Descrição do Material" />
+						<ui:template>
+							<Text text="{Maktx}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                </ui:columns>
+            </ui:Table>
+        </content>
+    </Page>
+</mvc:View>

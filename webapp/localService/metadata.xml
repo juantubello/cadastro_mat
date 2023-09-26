@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZCAD_MATERIAL_SRV" xml:lang="pt" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="MATPROC" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat"/>
+                <Property Name="Usuario" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Status do Fluxo"/>
+                <Property Name="Datum" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Data atual"/>
+                <Property Name="Timlo" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Elemento de dado TIME para SYST"/>
+                <Property Name="Maktx" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Denominação"/>
+                <Property Name="Mtart" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Tipo material"/>
+                <Property Name="Meins" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="UM básica" sap:semantics="unit-of-measure"/>
+                <Property Name="Ntgew" Type="Edm.Decimal" Precision="13" Scale="3" sap:unicode="false" sap:unit="Gewei" sap:label="Peso líquido"/>
+                <Property Name="Brgew" Type="Edm.Decimal" Precision="13" Scale="3" sap:unicode="false" sap:unit="Gewei" sap:label="Peso bruto"/>
+                <Property Name="Gewei" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Unidade de peso" sap:semantics="unit-of-measure"/>
+                <Property Name="Volum" Type="Edm.Decimal" Precision="13" Scale="3" sap:unicode="false" sap:unit="Voleh" sap:label="Volume"/>
+                <Property Name="Voleh" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Unidade volume" sap:semantics="unit-of-measure"/>
+                <Property Name="Steuc" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="Cód.controle"/>
+                <Property Name="Matkl" Type="Edm.String" MaxLength="9" sap:unicode="false" sap:label="GrpMercads."/>
+                <Property Name="Bklas" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Classe avaliaç."/>
+            </EntityType>
+            <EntityContainer Name="ZCAD_MATERIAL_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="MATPROCSet" EntityType="ZCAD_MATERIAL_SRV.MATPROC" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://sap-erp-apd01.fortlev.com.br:8001/sap/opu/odata/sap/ZCAD_MATERIAL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://sap-erp-apd01.fortlev.com.br:8001/sap/opu/odata/sap/ZCAD_MATERIAL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

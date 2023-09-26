@@ -1,0 +1,373 @@
+<mvc:View
+    controllerName="br.com.fortlev.cadmaterial.cadmaterial.controller.Cadastro"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+>
+    <Page
+        title="{= ${newModel>/editable} === true ? ${i18n>cadastroTitle} : ${i18n>confTitle}}"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+    >
+        <headerContent>
+            <Button
+                id="save"
+                text="Salvar"
+                visible="{newModel>/save}"
+                press=".savePress"
+            />
+            <Button
+                id="conf"
+                text="Confirmar"
+                visible="{newModel>/conf}"
+                press=".confPress"
+            />
+            <Button
+                id="cancel"
+                text="Cancelar"
+                visible="{newModel>/conf}"
+                press=".cancPress"
+            />
+        </headerContent>
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <f:SimpleForm
+                    id="basicos"
+                    editable="{newModel>/editable}"
+                    layout="ColumnLayout"
+                    title="Dados Básicos"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                >
+                    <f:content>
+                        <Label text="Tipo do Material" />
+                        <Select
+                            id="tipoMat"
+                            editable="{newModel>/editable}"
+                            selectedKey="{cad>/Mtart}"
+                        >
+                            <items>
+                                <core:Item
+                                    text="ZIBE - Consumo"
+                                    key="ZIBE"
+                                />
+                                <core:Item
+                                    text="ZRSA - Peças Reposição"
+                                    key="ZRSA"
+                                />
+                                <core:Item
+                                    text="NLAG - Imobilizado"
+                                    key="NLAG"
+                                />
+                                <core:Item
+                                    text="ROH  - Matéria-Prima"
+                                    key="ROH"
+                                />
+                                <core:Item
+                                    text="VERP - Embalagens"
+                                    key="VERP"
+                                />
+                            </items>
+                        </Select>
+                        <Label text="Unidade de Medida" />
+                        <ComboBox
+                            items="{path: '/UMBasicaSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMBasica"
+                            editable="{newModel>/editable}"
+                            selectedKey="{cad>/Meins}"
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
+                        </ComboBox>
+                        <Label text="Grupo de Mercadorias" />
+                        <ComboBox
+                            items="{path: '/GMERCSet', sorter: { path: 'Matkl' }, length: '500'}"
+                            id="grupoMerc"
+                            editable="{newModel>/editable}"
+                            selectedKey="{cad>/Matkl}"
+                        >
+                            <core:ListItem
+                                text="{Matkl} - {Wgbez}"
+                                key="{Matkl}"
+                            />
+                        </ComboBox>
+                        <Label text="Classe de Avaliação" />
+                        <ComboBox
+                            items="{path: '/CAvalSet', sorter: { path: 'Bklas' }, length: '500'}"
+                            id="classAval"
+                            editable="{newModel>/editable}"
+                            selectedKey="{cad>/Bklas}"
+                        >
+                            <core:ListItem
+                                text="{Bklas} - {Bkbez}"
+                                key="{Bklas}"
+                            />
+                        </ComboBox>
+                        <Label text="Peso Liquido/U.M" />
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{cad>/Ntgew}"
+                        />
+                        <ComboBox
+                            items="{path: '/UMPesoSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMPeso1"
+                            editable="{newModel>/editable}"
+                            selectedKey="{cad>/Gewei}"
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL1 L2 M3 S3" />
+                            </layoutData>
+                        </ComboBox>
+                        <Label text="Peso Bruto/U.M" />
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{cad>/Brgew}"
+                        />
+                        <ComboBox
+                            items="{path: '/UMPesoSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMPeso2"
+                            editable="{newModel>/editable}"
+                            selectedKey="{cad>/Gewei}"
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL1 L2 M3 S3" />
+                            </layoutData>
+                        </ComboBox>
+                        <Label text="Volume/U.M" />
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{cad>/Volum}"
+                        />
+                        <ComboBox
+                            items="{path: '/UMVolumeSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMVolume"
+                            editable="{newModel>/editable}"
+                            selectedKey="{cad>/Voleh}"
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL1 L2 M3 S3" />
+                            </layoutData>
+                        </ComboBox>
+                    </f:content>
+                </f:SimpleForm>
+                <f:SimpleForm
+                    id="descricoes"
+                    editable="{newModel>/editable}"
+                    layout="ResponsiveGridLayout"
+                    title="Descrições"
+                >
+                    <f:content>
+                        <Label text="Descrição Breve" />
+                        <Input
+                            editable="{newModel>/editable}"
+                            maxLength="40"
+                            value="{cad>/Maktx}"
+                        />
+                        <Label text="Descrição Longa" />
+                        <TextArea
+                            editable="{newModel>/editable}"
+                            width="100%"
+                            maxLength="240"
+                        />
+                    </f:content>
+                </f:SimpleForm>
+                <f:SimpleForm
+                     id="engenharia"
+                    editable="{newModel>/editable}"
+                    layout="ColumnLayout"
+                    title="Engenharia"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                >
+                    <f:content>
+                        <Label text="Descrição Curta" />
+                        <Input
+                            required="true"
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Descricao}"
+                            maxLength="40"
+                        />
+                        <Label text="Descrição Detalhada" />
+                       
+                        	<TextArea value="{engenharia>/DescricaoLonga}"  width="100%"  editable="{newModel>/editable}"  required="true"/>
+                         <Label text="Unidade de Medida"  required="true"/>
+                        <ComboBox
+                            items="{path: '/UMBasicaSet', sorter: { path: 'Msehi' }, length: '500'}"
+                            id="UMBasicaEngenharia"
+                            editable="{newModel>/editable}"
+                            selectedKey="{engenharia>/UnidMedida}"
+                             
+                        >
+                            <core:ListItem
+                                text="{Msehi} - {Msehl}"
+                                key="{Msehi}"
+                            />
+                        </ComboBox>
+                          <Label text="Grupo de Mercadorias"  required="true"/>
+                        <ComboBox
+                            items="{path: '/GMERCSet', sorter: { path: 'Matkl' }, length: '500'}"
+                            id="grupoMercEngenharia"
+                            editable="{newModel>/editable}"
+                            selectedKey="{engenharia>/Matkl}"
+                        >
+                            <core:ListItem
+                                text="{Matkl} - {Wgbez}"
+                                key="{Matkl}"
+                            />
+                        </ComboBox>
+                         <Label text="Arquivos eletrônicos" />
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/CodMaterialEngenharia}"
+                        />
+                         <Label text="Tipo do Material"  required="true"/>
+                        <Select
+                            id="tipoMatEngenharia"
+                            editable="{newModel>/editable}"
+                            selectedKey="{engenharia>/TipoMaterial}"
+                        >
+                            <items>
+                              <core:Item
+                                    text=""
+                                    key=""
+                                />
+                                <core:Item
+                                    text="ZIBE - Consumo"
+                                    key="ZIBE"
+                                />
+                                <core:Item
+                                    text="ZRSA - Peças Reposição"
+                                    key="ZRSA"
+                                />
+                                <core:Item
+                                    text="NLAG - Imobilizado"
+                                    key="NLAG"
+                                />
+                                <core:Item
+                                    text="ROH  - Matéria-Prima"
+                                    key="ROH"
+                                />
+                                <core:Item
+                                    text="VERP - Embalagens"
+                                    key="VERP"
+                                />
+                            </items>
+                        </Select>
+                        <Label text="Aplicação (utilização)"  required="true"/>
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Aplicacao}"
+                        />
+                        <Label text="Cor"  required="true"/>
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Cor}"
+                        />
+                        <Label text="Fabricante"  required="true"/>
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Fabricante}"
+                        />
+                           <Label text="Referência Fabricante "  required="true"/>
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/RefFabricante}"
+                        />
+                           <Label text="Altura"  required="true"/>
+                        <Input
+                        type="Number"
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Comprimento}"
+                        />
+                           <Label text="Largura"  required="true"/>
+                        <Input
+                        type="Number"
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Largura}"
+                        />
+                           <Label text="Comprimento"  required="true"/>
+                        <Input
+                        type="Number"
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Altura}"
+                        />
+                          <Label text="Espessura"  required="true"/>
+                        <Input
+                        type="Number"
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Espessura}"
+                        />
+                          <Label text="Diâmetro/Raio"  required="true"/>
+                        <Input
+                            type="Number"
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/DiameterRadio}"
+                        />
+                        <Label text="Tensão"  required="true"/>
+                        <Input
+                            type="Number"
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Tensao}"
+                        />
+                        <Label text="Amperagem"  required="true"/>
+                        <Input
+                            type="Number"
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/Amperagem}"
+                        />
+                        <Label text="Informações Complementares" />
+                        <Input
+                            editable="{newModel>/editable}"
+                            value="{engenharia>/InfoComplementares}"
+                        />
+                        
+                    </f:content>
+                </f:SimpleForm>
+                                <f:SimpleForm
+                    id="fiscal"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title="Fiscal"
+                >
+                    <f:content>
+                        <Label text="NCM (TIPI)" />
+                        <Input
+                            editable="{newModel>/editable}"
+                            maxLength="16"
+                            value="{cad>/Steuc}"
+                        />
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,160 @@
+{
+  "_version": "1.17.0",
+  "sap.app": {
+    "id": "br.com.fortlev.cadmaterial.cadmaterial",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.3"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.8.4",
+      "toolsId": "2f9686ab-ea5b-4444-a048-05121f52a081"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZCAD_MATERIAL_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "br-com-fortlev-cadmaterial-cadmaterial-inbound": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "ZFLUXO_MAT",
+          "action": "create",
+          "title": "{{flpTitle}}",
+          "subTitle": "{{flpSubtitle}}",
+          "icon": ""
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.71.24",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "br.com.fortlev.cadmaterial.cadmaterial.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      },
+      "engenharia": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "stagesModel": {
+        "type": "sap.ui.model.json.JSONModel"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "br.com.fortlev.cadmaterial.cadmaterial.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "interno",
+          "pattern": ":?query:",
+          "target": [
+            "interno"
+          ]
+        },
+        {
+          "pattern": "cadastro",
+          "name": "cadastro",
+          "target": "cadastro"
+        },
+        {
+          "pattern": "detalhes/{id}",
+          "name": "detalhes",
+          "target": "detalhes"
+        }
+      ],
+      "targets": {
+        "interno": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "interno",
+          "viewName": "Interno"
+        },
+        "cadastro": {
+          "viewId": "cadastro",
+          "viewName": "Cadastro"
+        },
+        "detalhes": {
+          "viewId": "detalhes",
+          "viewName": "Detalhes"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "br.com.fortlev.cadmaterial.cadmaterial.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

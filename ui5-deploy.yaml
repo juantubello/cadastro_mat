@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "2.5"
+metadata:
+  name: br.com.fortlev.cadmaterial.cadmaterial
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://sap-erp-apd01.fortlev.com.br:8001
+          client: "100"
+        app:
+          name: ZMM_CAD_MAT
+          description: Cadastro de Materiais
+          package: ZAURORA
+          transport: ERDK9D0AQ8
