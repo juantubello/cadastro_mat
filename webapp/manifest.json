@@ -92,7 +92,16 @@
       "engenharia": {
         "type": "sap.ui.model.json.JSONModel"
       },
+      "controladoria":{
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "suprimentos":{
+        "type": "sap.ui.model.json.JSONModel"
+      },
       "stagesModel": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "returnModel": {
         "type": "sap.ui.model.json.JSONModel"
       }
     },

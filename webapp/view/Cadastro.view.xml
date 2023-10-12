@@ -352,7 +352,7 @@
                         
                     </f:content>
                 </f:SimpleForm>
-                                <f:SimpleForm
+                                <!-- <f:SimpleForm
                     id="fiscal"
                     editable="true"
                     layout="ResponsiveGridLayout"
@@ -366,7 +366,7 @@
                             value="{cad>/Steuc}"
                         />
                     </f:content>
-                </f:SimpleForm>
+                </f:SimpleForm> -->
             </VBox>
         </content>
     </Page>

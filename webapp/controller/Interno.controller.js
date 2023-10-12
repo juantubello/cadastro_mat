@@ -64,7 +64,6 @@ sap.ui.define(
           var oItem = oEvent.getSource();
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
-          console.log(oItem);
           oRouter.navTo("detalhes", {
             id: window.encodeURIComponent(
               oItem.getBindingContext().getPath().substr(1)
